@@ -2,6 +2,7 @@ package com.cgvsu;
 
 import com.cgvsu.model.Model;
 import com.cgvsu.objreader.ObjReader;
+import com.cgvsu.objwriter.ObjWriter;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -11,7 +12,7 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
 
-        Path fileName = Path.of("../../3DModels/Faceform/WrapHead.obj");
+        Path fileName = args.length > 0 ? Path.of(args[0]) : Path.of("../../3DModels/Faceform/WrapHead.obj");
         String fileContent = Files.readString(fileName);
 
         System.out.println("Loading model ...");
@@ -21,5 +22,9 @@ public class Main {
         System.out.println("Texture vertices: " + model.textureVertices.size());
         System.out.println("Normals: " + model.normals.size());
         System.out.println("Polygons: " + model.polygons.size());
+        if (args.length == 2) {
+            ObjWriter.write(model, Path.of(args[1]));
+            System.out.println("Модель сохранена в " + args[1]);
+        }
     }
 }
