@@ -17,6 +17,7 @@ class ObjWriterTest {
         String data = "v -1.5 0.0 0.0\nv 0.0 1.0 0.0\nv 0.0 0.0 1.0\nv 2.0 1.0 0.0\n"
                 + "vt 0.5 0.25\nvn 0.0 0.0 1.0\n"
                 + "f 4 2 3 1\nf 3/1 2/1 1/1\nf 1//1 3//1 2//1\nf 2/1/1 1/1/1 3/1/1\n";
+        // Проверяем сохранение и чтение четырёх форматов грани.
         Path file = directory.resolve("моя модель.obj");
         ObjWriter.write(ObjReader.read(data), file);
         String saved = Files.readString(file);
@@ -26,6 +27,7 @@ class ObjWriterTest {
 
     @Test
     void emptyModel() throws Exception {
+        // Пустая модель должна дать пустой файл.
         Path file = directory.resolve("empty.obj");
         ObjWriter.write(new Model(), file);
         assertEquals("", Files.readString(file));
@@ -34,6 +36,7 @@ class ObjWriterTest {
     @Test
     void rejectsIncompletePolygon() {
         Model model = new Model();
+        // Грань без вершин должна вызвать ошибку.
         model.polygons.add(new Polygon());
         assertThrows(IllegalArgumentException.class,
                 () -> ObjWriter.write(model, directory.resolve("invalid.obj")));

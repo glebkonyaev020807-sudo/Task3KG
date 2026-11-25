@@ -20,11 +20,13 @@ public class Polygon {
         this.vertexIndices = vertexIndices;
     }
 
+    // Если у грани нет текстурных координат, список пуст.
     public void setTextureVertexIndices(ArrayList<Integer> textureVertexIndices) {
         assert textureVertexIndices.isEmpty() || textureVertexIndices.size() >= 3;
         this.textureVertexIndices = textureVertexIndices;
     }
 
+    // Если нормали не заданы, список пуст.
     public void setNormalIndices(ArrayList<Integer> normalIndices) {
         assert normalIndices.isEmpty() || normalIndices.size() >= 3;
         this.normalIndices = normalIndices;

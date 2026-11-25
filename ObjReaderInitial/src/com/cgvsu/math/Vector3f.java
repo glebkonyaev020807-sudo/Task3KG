@@ -16,6 +16,7 @@ public class Vector3f {
 
     float x, y, z;
 
+    // Для записи вершины или нормали нужны x, y и z.
     public float getX() {
         return x;
     }

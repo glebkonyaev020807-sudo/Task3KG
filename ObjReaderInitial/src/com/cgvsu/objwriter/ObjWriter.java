@@ -10,6 +10,7 @@ import java.nio.file.Path;
 
 public class ObjWriter {
     public static void write(Model model, Path file) throws IOException {
+        // Сначала записываем координаты, затем грани.
         StringBuilder text = new StringBuilder();
         for (Vector3f v : model.vertices) {
             text.append("v ").append(v.getX()).append(' ').append(v.getY()).append(' ').append(v.getZ()).append('\n');
@@ -34,15 +35,17 @@ public class ObjWriter {
                 || (!normals.isEmpty() && normals.size() != vertices.size())) {
             throw new IllegalArgumentException("Некорректные списки индексов полигона");
         }
+        // Строка f описывает одну грань.
         text.append('f');
         for (int i = 0; i < vertices.size(); i++) {
-            // В OBJ номера начинаются с единицы.
+            // Первый индекс в Java — 0, в OBJ — 1.
             text.append(' ').append(vertices.get(i) + 1);
             if (!textures.isEmpty() || !normals.isEmpty()) {
                 text.append('/');
                 if (!textures.isEmpty()) {
                     text.append(textures.get(i) + 1);
                 }
+                // Формат без текстурных координат: вершина//нормаль.
                 if (!normals.isEmpty()) {
                     text.append('/').append(normals.get(i) + 1);
                 }

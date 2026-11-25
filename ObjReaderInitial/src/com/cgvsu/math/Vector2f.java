@@ -9,6 +9,7 @@ public class Vector2f {
 
     float x, y;
 
+    // Для записи текстурной координаты нужны x и y.
     public float getX() {
         return x;
     }

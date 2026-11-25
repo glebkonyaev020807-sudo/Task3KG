@@ -22,6 +22,7 @@ public class Main {
         System.out.println("Texture vertices: " + model.textureVertices.size());
         System.out.println("Normals: " + model.normals.size());
         System.out.println("Polygons: " + model.polygons.size());
+        // Первый путь задаёт исходный файл, второй — куда сохранить модель.
         if (args.length == 2) {
             ObjWriter.write(model, Path.of(args[1]));
             System.out.println("Модель сохранена в " + args[1]);
